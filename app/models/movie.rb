@@ -1,4 +1,8 @@
 class Movie < ApplicationRecord
+  belongs_to :director, :class_name => "Director", :foreign_key => "director_id"
+  has_many :characters
+  has_many :actors, :through => :characters
+
   validates :director_id, :presence => true
   validates :title, :presence => true, :uniqueness => { :scope => :year }
   validates :year, numericality: { only_integer: true,
